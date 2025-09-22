@@ -45,3 +45,4 @@ G:\Sliit\Project\EAD\backend\obj\Debug\net8.0\refint\Backend.dll
 G:\Sliit\Project\EAD\backend\obj\Debug\net8.0\Backend.pdb
 G:\Sliit\Project\EAD\backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 G:\Sliit\Project\EAD\backend\obj\Debug\net8.0\ref\Backend.dll
+G:\Sliit\Project\EAD\backend\obj\Debug\net8.0\Backend.sourcelink.json

@@ -38,6 +38,18 @@ builder.Services.AddControllers().AddJsonOptions(o =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 🔑 CORS (allow frontend on 5173)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5173","http://localhost:8080") // React dev server
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+    );
+});
+
 // Auth
 var jwt = builder.Configuration.GetSection("Jwt").Get<JwtSettings>()!;
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
@@ -66,10 +78,18 @@ var app = builder.Build();
 app.UseMiddleware<ProblemDetailsMiddleware>();
 
 // Swagger in dev
-if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// ✅ Must be before authentication/authorization
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 // Seed default users/indices on first run (safe idempotent)
