@@ -107,14 +107,14 @@ const Bookings = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="w-12 h-12 border-b-2 rounded-full animate-spin border-primary-600"></div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">Bookings</h1>
           <p className="text-gray-600">Manage EV charging bookings</p>
@@ -122,9 +122,9 @@ const Bookings = () => {
         {(isBackoffice || isOperator) && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn-primary flex items-center"
+            className="flex items-center btn-primary"
           >
-            <PlusIcon className="h-5 w-5 mr-2" />
+            <PlusIcon className="w-5 h-5 mr-2" />
             Create Booking
           </button>
         )}
@@ -135,22 +135,22 @@ const Bookings = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   EV NIC
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Station
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Start Time
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   End Time
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Actions
                 </th>
               </tr>
@@ -158,16 +158,16 @@ const Bookings = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {bookings.map((booking) => (
                 <tr key={booking._id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {booking.EVNic}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {booking.StationName || 'Unknown Station'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {formatDateTime(booking.StartUtc)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {formatDateTime(booking.EndUtc)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -175,7 +175,7 @@ const Bookings = () => {
                       {booking.Status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  <td className="px-6 py-4 space-x-2 text-sm font-medium whitespace-nowrap">
                     {booking.Status === 'Pending' && (isBackoffice || isOperator) && (
                       <>
                         <button
@@ -183,21 +183,21 @@ const Bookings = () => {
                           className="text-green-600 hover:text-green-900"
                           title="Approve"
                         >
-                          <CheckIcon className="h-5 w-5" />
+                          <CheckIcon className="w-5 h-5" />
                         </button>
                         <button
                           onClick={() => handleApproveBooking(booking._id, false)}
                           className="text-red-600 hover:text-red-900"
                           title="Reject"
                         >
-                          <XMarkIcon className="h-5 w-5" />
+                          <XMarkIcon className="w-5 h-5" />
                         </button>
                       </>
                     )}
                     {(booking.Status === 'Pending' || booking.Status === 'Approved') && (
                       <button
                         onClick={() => handleCancelBooking(booking._id)}
-                        className="text-red-600 hover:text-red-900 text-xs"
+                        className="text-xs text-red-600 hover:text-red-900"
                       >
                         Cancel
                       </button>
@@ -251,6 +251,7 @@ const Bookings = () => {
             >
               <option value="">Select a station</option>
               {stations.map((station) => (
+                console.log(station),
                 <option key={station._id} value={station._id}>
                   {station.Name} - {station.Type}
                 </option>
@@ -286,7 +287,7 @@ const Bookings = () => {
             />
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex justify-end pt-4 space-x-3">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}

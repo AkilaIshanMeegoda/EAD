@@ -90,14 +90,14 @@ const Stations = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="w-12 h-12 border-b-2 rounded-full animate-spin border-primary-600"></div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">Stations</h1>
           <p className="text-gray-600">Manage charging stations and schedules</p>
@@ -105,18 +105,18 @@ const Stations = () => {
         {isBackoffice && (
           <button
             onClick={() => setIsStationModalOpen(true)}
-            className="btn-primary flex items-center"
+            className="flex items-center btn-primary"
           >
-            <PlusIcon className="h-5 w-5 mr-2" />
+            <PlusIcon className="w-5 h-5 mr-2" />
             Add Station
           </button>
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {stations.map((station) => (
           <div key={station._id} className="card">
-            <div className="flex justify-between items-start mb-3">
+            <div className="flex items-start justify-between mb-3">
               <h3 className="text-lg font-semibold text-gray-900">{station.Name}</h3>
               <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                 station.Type === 'DC' 
@@ -133,15 +133,15 @@ const Stations = () => {
             </div>
 
             {(isOperator || isBackoffice) && (
-              <div className="mt-4 pt-3 border-t border-gray-200">
+              <div className="pt-3 mt-4 border-t border-gray-200">
                 <button
                   onClick={() => {
                     setSelectedStation(station);
                     setIsScheduleModalOpen(true);
                   }}
-                  className="btn-primary w-full flex items-center justify-center text-sm"
+                  className="flex items-center justify-center w-full text-sm btn-primary"
                 >
-                  <CalendarIcon className="h-4 w-4 mr-2" />
+                  <CalendarIcon className="w-4 h-4 mr-2" />
                   Add Schedule
                 </button>
               </div>
@@ -150,7 +150,7 @@ const Stations = () => {
         ))}
 
         {stations.length === 0 && (
-          <div className="col-span-full text-center py-12">
+          <div className="py-12 text-center col-span-full">
             <p className="text-gray-500">No stations found</p>
           </div>
         )}
@@ -203,12 +203,12 @@ const Stations = () => {
               value={newStation.Type}
               onChange={handleStationInputChange}
             >
-              <option value="DC">DC Fast Charging</option>
-              <option value="AC">AC Charging</option>
+              <option value={1}>DC Fast Charging</option>
+              <option value={2}>AC Charging</option>
             </select>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex justify-end pt-4 space-x-3">
             <button
               type="button"
               onClick={() => setIsStationModalOpen(false)}
@@ -277,7 +277,7 @@ const Stations = () => {
             />
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex justify-end pt-4 space-x-3">
             <button
               type="button"
               onClick={() => {

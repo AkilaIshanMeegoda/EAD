@@ -131,15 +131,15 @@ const EVOwnerPortal = () => {
 
   if (!currentNic) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="min-h-screen px-4 py-12 bg-gray-50">
         <div className="max-w-md mx-auto">
-          <div className="text-center mb-8">
+          <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-900">EV Owner Portal</h1>
-            <p className="text-gray-600 mt-2">Access your charging bookings and manage your account</p>
+            <p className="mt-2 text-gray-600">Access your charging bookings and manage your account</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-lg font-semibold mb-4">Access Your Account</h2>
+          <div className="p-6 mb-6 bg-white rounded-lg shadow-md">
+            <h2 className="mb-4 text-lg font-semibold">Access Your Account</h2>
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label htmlFor="nic" className="block text-sm font-medium text-gray-700">
@@ -164,9 +164,9 @@ const EVOwnerPortal = () => {
             </form>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-lg font-semibold mb-4">New User?</h2>
-            <p className="text-gray-600 mb-4">Register as an EV owner to start booking charging sessions</p>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="mb-4 text-lg font-semibold">New User?</h2>
+            <p className="mb-4 text-gray-600">Register as an EV owner to start booking charging sessions</p>
             <button
               onClick={() => setIsRegisterModalOpen(true)}
               className="w-full btn-secondary"
@@ -243,7 +243,7 @@ const EVOwnerPortal = () => {
               />
             </div>
 
-            <div className="flex justify-end space-x-3 pt-4">
+            <div className="flex justify-end pt-4 space-x-3">
               <button
                 type="button"
                 onClick={() => setIsRegisterModalOpen(false)}
@@ -262,9 +262,9 @@ const EVOwnerPortal = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen px-4 py-8 bg-gray-50">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Welcome back!</h1>
             <p className="text-gray-600">NIC: {currentNic}</p>
@@ -272,9 +272,9 @@ const EVOwnerPortal = () => {
           <div className="flex space-x-3">
             <button
               onClick={() => setIsBookingModalOpen(true)}
-              className="btn-primary flex items-center"
+              className="flex items-center btn-primary"
             >
-              <PlusIcon className="h-5 w-5 mr-2" />
+              <PlusIcon className="w-5 h-5 mr-2" />
               New Booking
             </button>
             <button
@@ -288,11 +288,11 @@ const EVOwnerPortal = () => {
 
         {/* Available Stations */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Available Charging Stations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">Available Charging Stations</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {stations.map((station) => (
-              <div key={station._id} className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex justify-between items-start mb-3">
+              <div key={station._id} className="p-6 bg-white rounded-lg shadow-md">
+                <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-semibold text-gray-900">{station.Name}</h3>
                   <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                     station.Type === 'DC' 
@@ -302,13 +302,13 @@ const EVOwnerPortal = () => {
                     {station.Type}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Location: {station.Location}</p>
+                <p className="mb-4 text-sm text-gray-600">Location: {station.Location}</p>
                 <button
                   onClick={() => {
                     setNewBooking({ ...newBooking, StationId: station._id });
                     setIsBookingModalOpen(true);
                   }}
-                  className="w-full btn-primary text-sm"
+                  className="w-full text-sm btn-primary"
                 >
                   Book Now
                 </button>
@@ -326,19 +326,19 @@ const EVOwnerPortal = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Station
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Start Time
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     End Time
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Actions
                   </th>
                 </tr>
@@ -346,13 +346,13 @@ const EVOwnerPortal = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {bookingHistory.map((booking) => (
                   <tr key={booking._id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                       {booking.StationName || 'Unknown Station'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                       {formatDateTime(booking.StartUtc)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                       {formatDateTime(booking.EndUtc)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -360,7 +360,7 @@ const EVOwnerPortal = () => {
                         {booking.Status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
                       {canCancelBooking(booking) && (
                         <button
                           onClick={() => handleCancelBooking(booking._id)}
@@ -399,7 +399,7 @@ const EVOwnerPortal = () => {
                 name="StationId"
                 required
                 className="input-field"
-                value={newBooking.StationId}
+                value={newBooking._id}
                 onChange={handleBookingInputChange}
               >
                 <option value="">Select a station</option>
@@ -439,14 +439,14 @@ const EVOwnerPortal = () => {
               />
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="p-4 rounded-lg bg-blue-50">
               <p className="text-sm text-blue-800">
                 <strong>Note:</strong> Bookings can be cancelled up to 12 hours before the start time. 
                 You'll receive a QR code for approved bookings that you\'ll need to show at the charging station.
               </p>
             </div>
 
-            <div className="flex justify-end space-x-3 pt-4">
+            <div className="flex justify-end pt-4 space-x-3">
               <button
                 type="button"
                 onClick={() => setIsBookingModalOpen(false)}
